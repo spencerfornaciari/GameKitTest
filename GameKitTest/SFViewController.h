@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SFViewController : UIViewController
+@interface SFViewController : UIViewController <MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCBrowserViewControllerDelegate, UIActionSheetDelegate>
 
 @end

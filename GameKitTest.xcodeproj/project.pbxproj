@@ -22,7 +22,8 @@
 		89A8E74418AFD09D00B88F6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89A8E74218AFD09D00B88F6D /* InfoPlist.strings */; };
 		89A8E74618AFD09D00B88F6D /* GameKitTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A8E74518AFD09D00B88F6D /* GameKitTestTests.m */; };
 		89A8E75018AFD16C00B88F6D /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A8E74F18AFD16C00B88F6D /* GameKit.framework */; };
-		89A8E75418AFD2FC00B88F6D /* MatchmakingServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A8E75318AFD2FC00B88F6D /* MatchmakingServer.m */; };
+		89A8E75718AFDA7A00B88F6D /* SFBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A8E75618AFDA7A00B88F6D /* SFBrowserViewController.m */; };
+		89A8E75A18AFDAF700B88F6D /* SFAdvertising.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A8E75918AFDAF700B88F6D /* SFAdvertising.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +57,10 @@
 		89A8E74318AFD09D00B88F6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		89A8E74518AFD09D00B88F6D /* GameKitTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameKitTestTests.m; sourceTree = "<group>"; };
 		89A8E74F18AFD16C00B88F6D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		89A8E75218AFD2FC00B88F6D /* MatchmakingServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchmakingServer.h; path = ../MatchmakingServer.h; sourceTree = "<group>"; };
-		89A8E75318AFD2FC00B88F6D /* MatchmakingServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchmakingServer.m; path = ../MatchmakingServer.m; sourceTree = "<group>"; };
+		89A8E75518AFDA7A00B88F6D /* SFBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFBrowserViewController.h; path = ../SFBrowserViewController.h; sourceTree = "<group>"; };
+		89A8E75618AFDA7A00B88F6D /* SFBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFBrowserViewController.m; path = ../SFBrowserViewController.m; sourceTree = "<group>"; };
+		89A8E75818AFDAF700B88F6D /* SFAdvertising.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFAdvertising.h; path = ../SFAdvertising.h; sourceTree = "<group>"; };
+		89A8E75918AFDAF700B88F6D /* SFAdvertising.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFAdvertising.m; path = ../SFAdvertising.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,8 +166,10 @@
 		89A8E75118AFD2DB00B88F6D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				89A8E75218AFD2FC00B88F6D /* MatchmakingServer.h */,
-				89A8E75318AFD2FC00B88F6D /* MatchmakingServer.m */,
+				89A8E75818AFDAF700B88F6D /* SFAdvertising.h */,
+				89A8E75918AFDAF700B88F6D /* SFAdvertising.m */,
+				89A8E75518AFDA7A00B88F6D /* SFBrowserViewController.h */,
+				89A8E75618AFDA7A00B88F6D /* SFBrowserViewController.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -276,9 +281,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				89A8E72718AFD09D00B88F6D /* main.m in Sources */,
-				89A8E75418AFD2FC00B88F6D /* MatchmakingServer.m in Sources */,
+				89A8E75718AFDA7A00B88F6D /* SFBrowserViewController.m in Sources */,
 				89A8E73118AFD09D00B88F6D /* SFViewController.m in Sources */,
 				89A8E72B18AFD09D00B88F6D /* SFAppDelegate.m in Sources */,
+				89A8E75A18AFDAF700B88F6D /* SFAdvertising.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
