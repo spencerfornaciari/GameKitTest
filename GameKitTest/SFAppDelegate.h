@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *const kServiceType;
+
 @interface SFAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) MCSession *session;
+@property (strong, nonatomic) MCPeerID *peerId;
 
 @end

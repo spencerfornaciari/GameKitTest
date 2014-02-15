@@ -8,8 +8,6 @@
 
 #import "SFViewController.h"
 
-static NSString * const XXServiceType = @"in.macguff-GameKitTest";
-
 @interface SFViewController ()
 
 @property (nonatomic) NSMutableArray *mutableBlockedPeers;
@@ -46,6 +44,25 @@ static NSString * const XXServiceType = @"in.macguff-GameKitTest";
      }];
     
     
+    NSString *message = @"Hello, World!";
+    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    
+    if (![self.session sendData:data
+                        toPeers:peers
+                       withMode:MCSessionSendDataReliable
+                          error:&error]) {
+        NSLog(@"[Error] %@", error);
+    }
+    
+    NSOutputStream *outputStream =
+    [session startStreamWithName:name
+                          toPeer:peer];
+    
+    stream.delegate = self;
+    [stream scheduleInRunLoop:[NSRunLoop mainRunLoop]
+                      forMode:NSDefaultRunLoopMode];
+    [stream open];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -109,7 +126,10 @@ didReceiveInvitationFromPeer:(MCPeerID *)peerID
 
 -(void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
-    
+    NSString *message =
+    [[NSString alloc] initWithData:data
+                          encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", message);
 }
 
 -(void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID
@@ -118,6 +138,12 @@ didReceiveInvitationFromPeer:(MCPeerID *)peerID
 }
 
 -(void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error
+{
+    
+}
+
+//Streams are open channels of information used to continuously transfer data like audio, video, or real-time sensor events.
+-(void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID
 {
     
 }
@@ -143,6 +169,7 @@ didReceiveInvitationFromPeer:(MCPeerID *)peerID
 {
     
 }
+
 
 - (void)didReceiveMemoryWarning
 {

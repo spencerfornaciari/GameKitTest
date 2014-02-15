@@ -8,11 +8,34 @@
 
 #import "SFAppDelegate.h"
 
+NSString *const kServiceType = @"sn-gamekittest";
+
+@interface SFAppDelegate () <MCSessionDelegate, MCAdvertiserAssistantDelegate>
+
+@property (strong, nonatomic) MCAdvertiserAssistant *advertiserAssistant;
+
+@end
+
 @implementation SFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    // 1
+    NSString *peerName = self.myCard.firstName ? self.myCard.firstName : [[UIDevice currentDevice] name];
+    
+    self.peerId = [[MCPeerID alloc] initWithDisplayName:peerName]; // 2
+    self.session = [[MCSession alloc] initWithPeer:self.peerId
+                                  securityIdentity:nil
+                              encryptionPreference:MCEncryptionNone];
+    
+    self.session.delegate = nil;
+    
+    // 3
+    self.advertiserAssistant = [[MCAdvertiserAssistant alloc] initWithServiceType:kServiceType];
+     // 4
+     [self.advertiserAssistant start];
     return YES;
 }
 							
