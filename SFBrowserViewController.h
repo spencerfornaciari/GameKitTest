@@ -10,4 +10,9 @@
 
 @interface SFBrowserViewController : MCBrowserViewController
 
+@property (nonatomic, assign) NSUInteger maximumNumberOfPeers;
+@property (nonatomic, assign) NSUInteger minimumNumberOfPeers;
+
+-(void)setupWithServiceType:(NSString *)serviceType withSession:(MCSession *)session andPeer:(MCPeerID *)peerID;
+
 @end

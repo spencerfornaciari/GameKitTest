@@ -9,11 +9,15 @@
 #import "SFAppDelegate.h"
 
 NSString *const kServiceType = @"sn-gamekittest";
+NSString *const PeerConnectionAcceptedNotification = @"in.macguff.SwingBoxer:DataReceivedNotification";
 
-@interface SFAppDelegate () <MCSessionDelegate, MCAdvertiserAssistantDelegate>
+typedef void(^InvitationHandler)(BOOL accept, MCSession *session);
+
+@interface SFAppDelegate () <MCSessionDelegate, MCAdvertiserAssistantDelegate, MCNearbyServiceAdvertiserDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) MCAdvertiserAssistant *advertiserAssistant;
 @property (strong, nonatomic) MCNearbyServiceAdvertiser *advertiser;
+@property (strong, nonatomic) InvitationHandler handler;
 @property (strong, nonatomic) NSDictionary *discoveryInfo;
 
 @end
@@ -46,6 +50,26 @@ NSString *const kServiceType = @"sn-gamekittest";
          // 4
      [self.advertiserAssistant start];
     return YES;
+}
+
+-(void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
+{
+    self.handler = invitationHandler;
+    
+    [[[UIAlertView alloc] initWithTitle:@"Invitation"
+                               message:[NSString stringWithFormat:@"%@ would like to connect", peerID.displayName]
+                              delegate:self
+                     cancelButtonTitle:@"Nope"
+                     otherButtonTitles:@"Sure", nil] show];
+}
+
+#pragma mark - UIAlertViewDelegate Methods
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    BOOL accepted = (buttonIndex == alertView.cancelButtonIndex) ? NO : YES;
+    
+    self.handler(accepted, self.session);
 }
 
 							
@@ -98,6 +122,23 @@ NSString *const kServiceType = @"sn-gamekittest";
 
 -(void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
+    if (state == MCSessionStateConnected && self.session) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:PeerConnectionAcceptedNotification
+                                                                    object:nil
+                                                          userInfo:@{@"peer" : peerID, @"accept" : @YES}];
+    } else if (state == MCSessionStateNotConnected && self.session) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:PeerConnectionAcceptedNotification
+                                                            object:nil
+                                                          userInfo:@{@"peer" : peerID, @"accept" : @NO}];
+    }
+    
+}
+
+-(void)sendDataToPeer
+{
+    NSData *data = [NSData data];
+    NSError *error;
+    [self.session sendData:data toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:&error];
     
 }
 

@@ -10,6 +10,10 @@
 
 @interface SFBrowserViewController ()
 
+@property (nonatomic, strong) MCSession *session;
+@property (nonatomic, strong) MCPeerID *peerID;
+@property (nonatomic, strong) NSString *serviceType;
+
 @end
 
 @implementation SFBrowserViewController
@@ -36,6 +40,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)setupWithServiceType:(NSString *)serviceType withSession:(MCSession *)session andPeer:(MCPeerID *)peerID
+{
+    self.serviceType = serviceType;
+    self.session = session;
+    self.peerID = peerID;
 }
 
 @end

@@ -10,6 +10,7 @@
 
 extern NSString *const kServiceType;
 extern NSString *const DataReceivedNotification;
+extern NSString *const PeerConnectionAcceptedNotification;
 
 @interface SFAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -17,5 +18,7 @@ extern NSString *const DataReceivedNotification;
 
 @property (strong, nonatomic) MCSession *session;
 @property (strong, nonatomic) MCPeerID *peerId;
+
+-(void)sendDataToPeer;
 
 @end
