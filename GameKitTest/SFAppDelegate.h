@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 extern NSString *const kServiceType;
+extern NSString *const DataReceivedNotification;
 
 @interface SFAppDelegate : UIResponder <UIApplicationDelegate>
 

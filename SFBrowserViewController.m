@@ -27,8 +27,8 @@
 {
     [super viewDidLoad];
     
-    MCNearbyServiceBrowser *browser = [[MCNearbyServiceBrowser alloc] initWithPeer:localPeerID serviceType:XXServiceType];
-    browser.delegate = self;
+   // MCNearbyServiceBrowser *browser = [[MCNearbyServiceBrowser alloc] initWithPeer:localPeerID serviceType:XXServiceType];
+    //browser.delegate = self;
 	// Do any additional setup after loading the view.
 }
 

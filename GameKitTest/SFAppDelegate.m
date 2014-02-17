@@ -13,6 +13,8 @@ NSString *const kServiceType = @"sn-gamekittest";
 @interface SFAppDelegate () <MCSessionDelegate, MCAdvertiserAssistantDelegate>
 
 @property (strong, nonatomic) MCAdvertiserAssistant *advertiserAssistant;
+@property (strong, nonatomic) MCNearbyServiceAdvertiser *advertiser;
+@property (strong, nonatomic) NSDictionary *discoveryInfo;
 
 @end
 
@@ -23,21 +25,29 @@ NSString *const kServiceType = @"sn-gamekittest";
     // Override point for customization after application launch.
     
     // 1
-    NSString *peerName = self.myCard.firstName ? self.myCard.firstName : [[UIDevice currentDevice] name];
+    NSString *peerName = [[UIDevice currentDevice] name];
     
     self.peerId = [[MCPeerID alloc] initWithDisplayName:peerName]; // 2
     self.session = [[MCSession alloc] initWithPeer:self.peerId
                                   securityIdentity:nil
                               encryptionPreference:MCEncryptionNone];
     
-    self.session.delegate = nil;
+    self.session.delegate = self;
     
+    self.discoveryInfo = @{@"code": @"SWINGBOX"};
+    
+//    self.advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:self.peerId
+//                                                        discoveryInfo:self.discoveryInfo
+//                                                          serviceType:kServiceType];
     // 3
-    self.advertiserAssistant = [[MCAdvertiserAssistant alloc] initWithServiceType:kServiceType];
-     // 4
+    self.advertiserAssistant = [[MCAdvertiserAssistant alloc] initWithServiceType:kServiceType
+                                                                    discoveryInfo:self.discoveryInfo
+                                                                          session:self.session];
+         // 4
      [self.advertiserAssistant start];
     return YES;
 }
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -64,6 +74,31 @@ NSString *const kServiceType = @"sn-gamekittest";
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
+{
+    
+}
+
+-(void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress
+{
+    
+}
+
+-(void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID
+{
+    
+}
+
+-(void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error
+{
+    
+}
+
+-(void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
+{
+    
 }
 
 @end
