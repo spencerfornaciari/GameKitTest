@@ -14,6 +14,11 @@
 @property (nonatomic, strong) MCPeerID *peerID;
 @property (nonatomic, strong) NSString *serviceType;
 
+@property (nonatomic, strong) NSMutableArray *nearbyPeers;
+@property (nonatomic, strong) NSMutableArray *acceptedPeers;
+@property (nonatomic, strong) NSMutableArray *declinedPeers;
+
+
 @end
 
 @implementation SFBrowserViewController
@@ -27,11 +32,25 @@
     return self;
 }
 
+-(id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    
+    self.maximumNumberOfPeers = 1;
+    self.minimumNumberOfPeers = 1;
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-   // MCNearbyServiceBrowser *browser = [[MCNearbyServiceBrowser alloc] initWithPeer:localPeerID serviceType:XXServiceType];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(peerConneceted:)
+                                                 name:PeerConnectionAcceptedNotification
+                                               object:nil];
+    
     //browser.delegate = self;
 	// Do any additional setup after loading the view.
 }

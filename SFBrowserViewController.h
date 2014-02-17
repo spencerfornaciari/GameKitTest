@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Spencer Fornaciari. All rights reserved.
 //
 
-#import <MultipeerConnectivity/MultipeerConnectivity.h>
+#import "SFAppDelegate.h"
 
 @interface SFBrowserViewController : MCBrowserViewController
 
